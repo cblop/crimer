@@ -44,7 +44,8 @@
                                        ]))
 
 (-> (insert-into :report)
-    (values (:reports crimes/db)))
+    (values (:reports crimes/db))
+    sql/format)
 
 (j/query db-map ["SELECT * FROM report"])
 
