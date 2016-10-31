@@ -7,5 +7,6 @@
                  [faker "0.2.2"]
                  [org.clojure/java.jdbc "0.6.2-alpha3"]
                  [honeysql "0.8.1"]
+                 [korma "0.4.0"]
                  [mysql/mysql-connector-java "5.1.6"]
                  ])

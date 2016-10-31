@@ -55,7 +55,7 @@
    :weight 100
    :address "18 Pall Mall Drive"
    :city "Bath"
-   :number "0345 323 333"})
+   :phone "0345 323 333"})
 
 (def witness-b
   {:name "Michelle Brewer"
@@ -65,7 +65,7 @@
    :weight 40
    :address "99 Aces Avenue"
    :city "Bath"
-   :number "0345 399 994"})
+   :phone "0345 399 994"})
 
 (def interview-a
   {:interview "I saw a skinny-looking man get into a black Honda just after the murder happened. Then he went speeding off!"
@@ -80,7 +80,7 @@
    :name "Beth Anderson"})
 
 (def interview-d
-  {:interview "I saw the licence plate: it was 'BSO' - something, something."
+  {:interview "I saw the license plate: it was 'BSO' - something, something."
    :name "Andy Farmer"})
 
 (def interview-e
@@ -98,7 +98,7 @@
 
 (def report-c
   {:report "Gordon Knot, a music teacher, saw somebody suspicious just after the murder."
-   :location "Student Bar"})
+   :location "Music classroom"})
 
 (def report-d
   {:report "Michelle Brewer, who works at the bar, saw something suspicious."
@@ -113,7 +113,7 @@
    :make "Honda"
    :year 1978
    :owner "xxx xxxxren"
-   :licence "BSO-2342"})
+   :license "BSO-2342"})
 
 (defn person-gen []
   (let [name (first (name/names))
@@ -145,20 +145,21 @@
   (let [colour (rand-nth ["Blue" "Red" "Green" "Black" "White" "Yellow" "Pink"])
         make (rand-nth ["Nissan" "Lexus" "Ford" "Volkswagon" "BMW" "Mercedes" "Tesla" "Skoda" "Alfa Romeo" "Jaguar"])
         year (+ 1970 (rand-int 46))
-        owner (person-gen)
+        owner (first (name/names))
         license (str (apply str (take 3 (shuffle (map char (range 65 91)))))
                      "-" (+ 1000 (rand-int 9999))
                      )]
     {:colour colour
      :make make
      :year year
+     :owner owner
      :license license}))
 
 (take 10 (repeatedly person-gen))
 
 (defn make-records [num suspects witnesses interviews reports vehicles]
   (let [rand-people (take num (repeatedly person-gen))
-        rand-interviews (take num (repeat (map interview-gen (map :name rand-people))))
+        rand-interviews (take num (map interview-gen (map :name rand-people)))
         rand-reports (take num (repeatedly report-gen))
         rand-vehicles (take num (repeatedly vehicle-gen))
         ]
